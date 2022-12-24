@@ -12,10 +12,17 @@ jest.mock('../state/hook/useListaDePessoas', () => {
 })
 
 const mockNavegacao = jest.fn()
+const mockSorteio = jest.fn()
 
 jest.mock('react-router-dom', () => {
     return {
         useNavigate: () => mockNavegacao
+    }
+})
+
+jest.mock('../state/hook/useSorteador', () => {
+    return {
+        useSorteador: () => mockSorteio
     }
 })
 
@@ -65,6 +72,21 @@ describe('quando houver participantes suficientes', () => {
         //toHaveBeenCalled -> tenha sido chamado
         // toHaveBeenCalledTimes(1) -> tenha sido chamado pelo menos uma 1 vez
         expect(mockNavegacao).toHaveBeenCalledTimes(1)
-        expect(mockNavegacao).toHaveBeenCalledWith('/sorteio')     
+        expect(mockNavegacao).toHaveBeenCalledWith('/sorteio') 
+        expect(mockSorteio).toHaveBeenCalledTimes(1)
+    })
+})
+
+describe('o Rodape com participantes suficientes', () => {
+    beforeEach(() => {
+        (useListaDePessoas as jest.Mock).mockReturnValueOnce(['Max', 'Maria', 'Chloe', 'Charlott', 'José'])
+    })
+    test('habilita o início da brincadeira', async () => {
+        render(
+            <RecoilRoot>
+                <Rodape />
+            </RecoilRoot>)
+        const botao = screen.getByRole('button')
+        expect(botao).not.toBeDisabled()
     })
 })
