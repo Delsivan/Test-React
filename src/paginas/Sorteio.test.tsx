@@ -26,7 +26,7 @@ describe('pagina de sorteio', () => {
         ['Max', 'Maria'],
         ['Maria', 'Chloe'],
         ['Chloe', 'Charlott'],
-        [ 'Charlott', 'José'],
+        ['Charlott', 'José'],
         ['José', 'Max']
     ])
 
@@ -42,7 +42,7 @@ describe('pagina de sorteio', () => {
             </RecoilRoot>
         )
         const opcoes = screen.queryAllByRole('option')
-        expect(opcoes).toHaveLength(pessoas.length)
+        expect(opcoes).toHaveLength(pessoas.length + 1)
     })
 
     test('o amigo secreto e exibido quando solicitado', () => {

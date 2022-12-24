@@ -29,9 +29,11 @@ const Sorteio = () => {
                     value={participanteDaVez}
                     onChange={evento => setParticipanteDaVez(evento.target.value)}
                 >
+                    <option>Selecione seu nome:</option>
                     {pessoas.map(pessoa => <option key={pessoa}>{pessoa}</option>)}
                 </select>
-                <button>Sortear</button>
+                <p>Clique em sortear para ver quem e o seu amigo secreto!</p>
+                <button className="botao-sortear">Sortear</button>
             </form>
             {amigoSecreto && <p role="alert">{amigoSecreto}</p>}
         </section>
